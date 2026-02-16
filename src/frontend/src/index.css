@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.625rem;
+        /* Earthy, agricultural theme - warm neutrals */
+        --background: 0.98 0.005 85;
+        --foreground: 0.25 0.015 85;
+        --card: 1 0 0;
+        --card-foreground: 0.25 0.015 85;
+        --popover: 1 0 0;
+        --popover-foreground: 0.25 0.015 85;
+        /* Deep forest green as primary */
+        --primary: 0.42 0.12 155;
+        --primary-foreground: 0.98 0.005 85;
+        /* Warm stone gray as secondary */
+        --secondary: 0.88 0.01 85;
+        --secondary-foreground: 0.25 0.015 85;
+        --muted: 0.92 0.008 85;
+        --muted-foreground: 0.52 0.012 85;
+        /* Warm terracotta accent */
+        --accent: 0.88 0.01 85;
+        --accent-foreground: 0.25 0.015 85;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.88 0.008 85;
+        --input: 0.88 0.008 85;
+        --ring: 0.42 0.12 155;
+        --chart-1: 0.646 0.222 41.116;
+        --chart-2: 0.6 0.118 184.704;
+        --chart-3: 0.398 0.07 227.392;
+        --chart-4: 0.828 0.189 84.429;
+        --chart-5: 0.769 0.188 70.08;
+    }
+
+    .dark {
+        /* Dark mode with earthy tones */
+        --background: 0.18 0.015 85;
+        --foreground: 0.95 0.005 85;
+        --card: 0.22 0.015 85;
+        --card-foreground: 0.95 0.005 85;
+        --popover: 0.22 0.015 85;
+        --popover-foreground: 0.95 0.005 85;
+        /* Lighter green for dark mode */
+        --primary: 0.65 0.15 155;
+        --primary-foreground: 0.18 0.015 85;
+        --secondary: 0.28 0.015 85;
+        --secondary-foreground: 0.95 0.005 85;
+        --muted: 0.28 0.015 85;
+        --muted-foreground: 0.68 0.01 85;
+        --accent: 0.32 0.018 85;
+        --accent-foreground: 0.95 0.005 85;
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.95 0.005 85;
+        --border: 0.32 0.015 85;
+        --input: 0.32 0.015 85;
+        --ring: 0.65 0.15 155;
+        --chart-1: 0.488 0.243 264.376;
+        --chart-2: 0.696 0.17 162.48;
+        --chart-3: 0.769 0.188 70.08;
+        --chart-4: 0.627 0.265 303.9;
+        --chart-5: 0.645 0.246 16.439;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Focus visible styles for accessibility */
+    *:focus-visible {
+        @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+    }
+}
+

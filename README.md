@@ -1,2 +1,3 @@
-# shankar-gared-krishi-yantra-udhog
-Exported from Caffeine project: Shankar Gared Krishi Yantra Udhog
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

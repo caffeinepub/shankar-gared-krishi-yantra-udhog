@@ -1,0 +1,74 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Apply uploaded logo and hero background images across the marketing site",
+  "requirements": [
+    {
+      "id": "REQ-24",
+      "summary": "Add the four user-uploaded images as static frontend assets under the existing generated assets convention",
+      "acceptanceCriteria": [
+        "All four uploaded image files exist in the repo under the chosen static assets folder and are accessible via `/assets/...` URLs at runtime.",
+        "No backend changes are required to serve these images."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png",
+          "operation": "create",
+          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+        },
+        {
+          "path": "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png",
+          "operation": "create",
+          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+        },
+        {
+          "path": "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png",
+          "operation": "create",
+          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+        },
+        {
+          "path": "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y-1.png",
+          "operation": "create",
+          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+        }
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "summary": "Replace Header and Footer branding logo with the uploaded logo image while keeping existing English alt text and layout",
+      "acceptanceCriteria": [
+        "Header logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
+        "Footer logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
+        "No broken image links appear in the Header or Footer."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Header.tsx",
+          "operation": "modify",
+          "description": "Update the header logo `img` source to use the uploaded logo at `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (switch to `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` only if needed), keeping the existing English alt text and current sizing/alignment."
+        },
+        {
+          "path": "frontend/src/components/marketing/Footer.tsx",
+          "operation": "modify",
+          "description": "Update the footer logo `img` source to use the uploaded logo at `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (switch to `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` only if needed), keeping the existing English alt text and current sizing/alignment."
+        }
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "summary": "Replace the Hero background image with the uploaded background while preserving strong text contrast and object-cover behavior",
+      "acceptanceCriteria": [
+        "The Hero section uses the uploaded background image and it covers the section without distortion (object-cover behavior).",
+        "Hero headline, description, and CTA buttons remain readable on top of the new background (sufficient overlay/gradient remains).",
+        "No broken image link appears in the Hero section."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/marketing/Hero.tsx",
+          "operation": "modify",
+          "description": "Replace the Hero background image source with `frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png` (switch to `frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` only if needed). Ensure the image remains `object-cover` and keep/adjust the existing gradient overlay and/or opacity to maintain readable text contrast."
+        }
+      ]
+    }
+  ]
+}

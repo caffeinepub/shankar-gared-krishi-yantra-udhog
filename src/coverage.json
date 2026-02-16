@@ -1,0 +1,64 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-16T17:01:19.297Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-24",
+        "summary": "Add the 4 user-uploaded image files to the frontend as static assets under `frontend/public/assets/uploaded/` (or `frontend/public/assets/generated/` if that is the existing convention for site images), preserving the original filenames:\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y.png`\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png`",
+        "status": "missing",
+        "plannedFiles": [
+          "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png",
+          "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png",
+          "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png",
+          "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y-1.png"
+        ],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-25",
+        "summary": "Update the marketing site branding to use the uploaded logo image in the Header and Footer by replacing the current logo image source (`/assets/generated/shankar-gared-logo.dim_512x512.png`) with the uploaded logo file `Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (or `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` if the former is not suitable), while keeping existing alt text in English.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/marketing/Header.tsx",
+          "frontend/src/components/marketing/Footer.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/marketing/Header.tsx",
+          "frontend/src/components/marketing/Footer.tsx"
+        ]
+      },
+      {
+        "id": "REQ-26",
+        "summary": "Apply the uploaded background image `Gemini_Generated_Image_i78ybxi78ybxi78y.png` (or `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` if the former is not suitable) as the Hero background image by replacing the current Hero image source (`/assets/generated/hero-hardware-agrimachinery.dim_1600x900.png`). Ensure text contrast and readability remain strong by keeping or adjusting the existing overlay/gradient as needed.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/marketing/Hero.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/marketing/Hero.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/marketing/Footer.tsx",
+    "frontend/src/components/marketing/Header.tsx",
+    "frontend/src/components/marketing/Hero.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

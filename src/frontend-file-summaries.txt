@@ -1,0 +1,21 @@
+{
+  "frontend/src/App.tsx": "Main application component with view switching between marketing single-page layout, product management, customer-facing shop, and buy product pages with state management for selected product.",
+  "frontend/src/components/marketing/Header.tsx": "Responsive header with navigation supporting four views (marketing, shop, products, buy) with smooth scrolling for marketing sections, mobile menu, and updated logo using the uploaded Agri-Mach & Oils branding image.",
+  "frontend/src/components/marketing/Hero.tsx": "Hero section with updated background image showing agricultural equipment and oils, maintaining strong text contrast with gradient overlay and call-to-action buttons for phone and directions.",
+  "frontend/src/components/marketing/Categories.tsx": "Product categories section displaying six category cards with icons, titles, and descriptions for hardware and agricultural products.",
+  "frontend/src/components/marketing/Services.tsx": "Services section showcasing six service offerings with checkmark icons and detailed descriptions.",
+  "frontend/src/components/marketing/About.tsx": "About section with company description, values, and key statistics displayed in a three-column grid.",
+  "frontend/src/components/marketing/Contact.tsx": "Contact section displaying the updated store address \"Dakbel, Bagru, Rajasthan 303007\" with Google Maps integration.",
+  "frontend/src/components/marketing/Footer.tsx": "Footer component displaying the updated store address, contact information, social media links, quick navigation, and updated logo using the uploaded Agri-Mach & Oils branding image.",
+  "frontend/src/index.css": "Global styles with custom OKLCH color system using earthy tones (deep forest green primary, warm neutrals) for both light and dark modes, plus accessibility focus styles.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with custom color tokens, border radius, shadows, and system font stack.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file for future React Query hooks if backend functionality is added.",
+  "frontend/src/lib/storeAddress.ts": "Centralized store address configuration with the address \"Dakbel, Bagru, Rajasthan 303007\" and a helper function to generate Google Maps URLs.",
+  "frontend/src/lib/fileToExternalBlob.ts": "Helper utility to convert File objects to ExternalBlob instances for image uploads using FileReader API.",
+  "frontend/src/hooks/useProducts.ts": "React Query hooks for managing product operations including list, get single product by id, create, update, and delete with automatic cache invalidation.",
+  "frontend/src/pages/ProductManagement.tsx": "Full product management UI with admin-only access control requiring Internet Identity login, checking admin status before allowing create/edit/delete operations, displaying backend authorization errors in English, and showing appropriate access gates for unauthenticated or non-admin users.",
+  "frontend/src/pages/Shop.tsx": "Customer-facing shop page displaying product catalog with cards showing images, names, descriptions, prices, and Buy Now buttons that trigger the buy flow.",
+  "frontend/src/pages/BuyProduct.tsx": "Individual product buy page with image, full details, quantity selector, total price calculation, and contact-based CTAs (tel/mailto) with prefilled order information.",
+  "frontend/src/hooks/useAdminStatus.ts": "React Query hook that checks if the current authenticated user is an admin by calling the backend isCallerAdmin method, with proper loading states and identity dependency tracking.",
+  "frontend/src/components/auth/AccessGate.tsx": "Reusable access control UI component that displays either a login-required prompt with Internet Identity login button or an access-denied message for non-admin users using shadcn/ui Card components."
+}

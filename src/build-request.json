@@ -1,0 +1,87 @@
+{
+  "kind": "build_request",
+  "title": "Apply uploaded logo and background images across the website",
+  "projectName": "Shankar Gared",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-24",
+      "text": "Add the 4 user-uploaded image files to the frontend as static assets under `frontend/public/assets/uploaded/` (or `frontend/public/assets/generated/` if that is the existing convention for site images), preserving the original filenames:\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y.png`\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png`",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1",
+          "msg-2"
+        ],
+        "quotes": [
+          "add this logo and background in website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All four uploaded image files exist in the repo under the chosen static assets folder and are accessible via `/assets/...` URLs at runtime.",
+        "No backend changes are required to serve these images."
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "text": "Update the marketing site branding to use the uploaded logo image in the Header and Footer by replacing the current logo image source (`/assets/generated/shankar-gared-logo.dim_512x512.png`) with the uploaded logo file `Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (or `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` if the former is not suitable), while keeping existing alt text in English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1",
+          "msg-2"
+        ],
+        "quotes": [
+          "add this logo and background in website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Header logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
+        "Footer logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
+        "No broken image links appear in the Header or Footer."
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Apply the uploaded background image `Gemini_Generated_Image_i78ybxi78ybxi78y.png` (or `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` if the former is not suitable) as the Hero background image by replacing the current Hero image source (`/assets/generated/hero-hardware-agrimachinery.dim_1600x900.png`). Ensure text contrast and readability remain strong by keeping or adjusting the existing overlay/gradient as needed.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1",
+          "msg-2"
+        ],
+        "quotes": [
+          "add this logo and background in website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Hero section uses the uploaded background image and it covers the section without distortion (object-cover behavior).",
+        "Hero headline, description, and CTA buttons remain readable on top of the new background (sufficient overlay/gradient remains).",
+        "No broken image link appears in the Hero section."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under `frontend/src/components/ui` (compose them instead).",
+    "Do not edit any files listed in `frontend.immutablePaths` in SYSTEM_CONTEXT.",
+    "Use English for any user-facing text."
+  ],
+  "nonGoals": [
+    "Do not change backend canister logic or data schemas.",
+    "Do not redesign unrelated pages or modify product/shop/cart functionality beyond applying the requested logo/background assets."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

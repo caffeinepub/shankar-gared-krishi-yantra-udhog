@@ -1,0 +1,280 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 15,
+  "summary": "Build a website for a hardware shop named \"Shankar Gared Krishi Yantra Udhog\".",
+  "architectural_notes": [
+    "Add admin-only access control for product management UI and product CRUD backend endpoints (authentication + authorization)."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-single-page-marketing-website-for-the-hardware-shop-named-shankar-gared-krishi-yantra-udhog",
+      "title": "Create a responsive, single-page marketing website for the hardware shop named “Shankar Gared Krishi Yantra Udhog”.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-standard-hardware-shop-content-sections-header-with-navigation-hero-section-product-categories-services-about-the-shop-and-contact-section-including-address-placeholder-phone-placeholder-email-placeholder-and-business-hours-placeholder",
+      "title": "Implement standard hardware-shop content sections: Header with navigation, Hero section, Product Categories, Services, About the Shop, and Contact section (including address placeholder, phone placeholder, email placeholder, and business hours placeholder).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-clear-call-to-action-area-in-the-hero-and-contact-sections-e-g-call-now-and-get-directions-using-placeholder-links-that-can-be-updated-later",
+      "title": "Add a clear call-to-action area in the hero and contact sections (e.g., “Call Now” and “Get Directions”) using placeholder links that can be updated later.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-a-coherent-visual-theme-appropriate-for-a-hardware-agri-equipment-shop-distinct-color-palette-typography-spacing-button-styles-and-use-it-consistently-across-all-sections",
+      "title": "Define and apply a coherent visual theme appropriate for a hardware/agri-equipment shop (distinct color palette, typography, spacing, button styles) and use it consistently across all sections.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-to-the-frontend-and-use-them-in-the-layout-logo-in-header-footer-hero-image-in-hero-section-category-icons-cards-in-categories-section-store-them-under-frontend-public-assets-generated",
+      "title": "Add generated static images to the frontend and use them in the layout (logo in header/footer; hero image in hero section; category icons/cards in categories section). Store them under frontend/public/assets/generated.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-placeholder-phone-number-and-email-address-across-the-marketing-site-with-phone-number-9928281833-and-email-sgkyu-gmail-com-ensuring-both-the-displayed-text-and-the-underlying-link-targets-tel-mailto-are-updated-wherever-they-appear-e-g-hero-cta-contact-section-cards-contact-cta-button-and-footer-contact-info",
+      "title": "Replace the existing placeholder phone number and email address across the marketing site with phone number \"9928281833\" and email \"sgkyu@gmail.com\", ensuring both the displayed text and the underlying link targets (tel:/mailto:) are updated wherever they appear (e.g., Hero CTA, Contact section cards, Contact CTA button, and Footer contact info).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-site-s-store-address-to-dakbel-bagru-rajasthan-303007-wherever-the-address-appears-at-minimum-contact-section-address-card-and-footer-contact-info-replacing-the-current-placeholder-address-text",
+      "title": "Update the site’s store address to: \"Dakbel, Bagru, Rajasthan 303007\" wherever the address appears (at minimum: Contact section address card and Footer contact info), replacing the current placeholder address text.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-map-directions-links-to-point-to-the-updated-address-dakbel-bagru-rajasthan-303007-so-that-the-get-directions-visit-our-store-ctas-open-a-map-search-for-the-updated-address-rather-than-only-the-shop-name",
+      "title": "Update the map/directions links to point to the updated address (Dakbel, Bagru, Rajasthan 303007) so that the 'Get Directions' / 'Visit Our Store' CTAs open a map search for the updated address rather than only the shop name.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-product-management-ui-admin-style-that-allows-uploading-product-photos-and-managing-product-details-name-description-price-add-new-products-view-existing-products-in-a-list-grid-edit-them-and-delete-them",
+      "title": "Create a product management UI (admin-style) that allows uploading product photos and managing product details (name, description, price): add new products, view existing products in a list/grid, edit them, and delete them.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visible-navigation-entry-point-from-the-existing-site-to-access-the-product-management-ui-e-g-a-new-header-nav-item-without-breaking-the-existing-single-page-marketing-navigation",
+      "title": "Add a visible navigation entry point from the existing site to access the product management UI (e.g., a new header/nav item) without breaking the existing single-page marketing navigation.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-customer-facing-product-shopping-view-separate-from-the-existing-product-management-admin-ui-that-lists-all-products-from-the-backend-with-photo-name-short-description-and-price-and-includes-a-clear-buy-call-to-action-on-each-product",
+      "title": "Add a customer-facing product shopping view (separate from the existing Product Management admin UI) that lists all products from the backend with photo, name, short description, and price, and includes a clear \"Buy\" call-to-action on each product.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-per-product-buy-page-screen-that-shows-product-details-photo-name-full-description-unit-price-and-allows-the-user-to-select-a-quantity-and-see-a-computed-total-price-with-contact-based-purchase-ctas-tel-and-mailto-prefilled-with-the-selected-product-and-quantity",
+      "title": "Implement a per-product Buy page/screen that shows product details (photo, name, full description, unit price) and allows the user to select a quantity and see a computed total price, with contact-based purchase CTAs (tel: and mailto:) prefilled with the selected product and quantity.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-top-level-view-switching-so-the-app-can-navigate-between-marketing-shop-customer-facing-and-manage-products-admin-while-keeping-the-current-header-behavior-and-marketing-section-scroll-to-anchor-navigation-intact",
+      "title": "Update the top-level view switching so the app can navigate between Marketing, Shop (customer-facing), and Manage Products (admin) while keeping the current header behavior and marketing section scroll-to-anchor navigation intact.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-any-missing-react-query-hooks-needed-for-the-buy-flow-e-g-fetching-a-single-product-by-id-using-the-existing-backend-getproduct-query-and-ensure-loading-error-states-are-handled-with-user-facing-english-text",
+      "title": "Add any missing React Query hooks needed for the buy flow (e.g., fetching a single product by id using the existing backend getProduct query) and ensure loading/error states are handled with user-facing English text.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-product-management-experience-so-that-only-the-admin-can-access-and-use-manage-products-require-internet-identity-login-and-show-a-clear-english-message-when-the-user-is-not-the-admin-hide-or-disable-product-create-edit-delete-ui-for-non-admin-users",
+      "title": "Update the frontend product management experience so that only the admin can access and use \"Manage Products\": require Internet Identity login and show a clear English message when the user is not the admin; hide or disable product create/edit/delete UI for non-admin users.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-product-category-field-so-every-product-can-be-classified-as-either-hardware-items-or-agriculture-machines-and-expose-this-field-in-both-backend-types-product-productinput-and-all-related-crud-methods",
+      "title": "Add a product category field so every product can be classified as either \"Hardware Items\" or \"Agriculture Machines\", and expose this field in both backend types (Product, ProductInput) and all related CRUD methods.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-manage-products-admin-ui-to-let-the-admin-select-a-category-hardware-items-or-agriculture-machines-when-creating-or-editing-a-product-and-display-the-category-in-the-product-list-cards",
+      "title": "Update the Manage Products (admin) UI to let the admin select a category (\"Hardware Items\" or \"Agriculture Machines\") when creating or editing a product, and display the category in the product list/cards.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-customer-shop-page-to-provide-an-easy-way-to-browse-products-by-category-hardware-items-and-agriculture-machines-including-an-all-option-without-removing-the-existing-product-list-behavior",
+      "title": "Update the customer Shop page to provide an easy way to browse products by category (\"Hardware Items\" and \"Agriculture Machines\"), including an \"All\" option, without removing the existing product list behavior.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-add-to-cart-option-for-products-in-the-shop-view-and-implement-a-cart-view-that-lets-users-review-cart-items-adjust-quantities-remove-items-and-see-a-computed-total",
+      "title": "Add an \"Add to Cart\" option for products in the Shop view and implement a Cart view that lets users review cart items, adjust quantities, remove items, and see a computed total.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-cart-navigation-entry-point-and-a-proceed-to-order-action-that-uses-the-existing-contact-based-ordering-approach-tel-and-mailto-and-includes-a-cart-summary-in-the-email-body",
+      "title": "Add a cart navigation entry point and a \"Proceed to Order\" action that uses the existing contact-based ordering approach (tel: and mailto:) and includes a cart summary in the email body.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-marketing-site-branding-to-use-the-uploaded-logo-image-in-the-header-and-footer-by-replacing-the-current-logo-image-source-assets-generated-shankar-gared-logo-dim-512x512-png-with-the-uploaded-logo-file-gemini-generated-image-8fgrd38fgrd38fgr-png-or-gemini-generated-image-8fgrd38fgrd38fgr-1-png-if-the-former-is-not-suitable-while-keeping-existing-alt-text-in-english",
+      "title": "Update the marketing site branding to use the uploaded logo image in the Header and Footer by replacing the current logo image source (`/assets/generated/shankar-gared-logo.dim_512x512.png`) with the uploaded logo file `Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (or `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` if the former is not suitable), while keeping existing alt text in English.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-the-uploaded-background-image-gemini-generated-image-i78ybxi78ybxi78y-png-or-gemini-generated-image-i78ybxi78ybxi78y-1-png-if-the-former-is-not-suitable-as-the-hero-background-image-by-replacing-the-current-hero-image-source-assets-generated-hero-hardware-agrimachinery-dim-1600x900-png-ensure-text-contrast-and-readability-remain-strong-by-keeping-or-adjusting-the-existing-overlay-gradient-as-needed",
+      "title": "Apply the uploaded background image `Gemini_Generated_Image_i78ybxi78ybxi78y.png` (or `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` if the former is not suitable) as the Hero background image by replacing the current Hero image source (`/assets/generated/hero-hardware-agrimachinery.dim_1600x900.png`). Ensure text contrast and readability remain strong by keeping or adjusting the existing overlay/gradient as needed.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a website for the hardware shop \"Shankar Gared Krishi Yantra Udhog\".",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Update Contact section placeholders with phone number 9928281833 and email sgkyu@gmail.com.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Update the website contact/address details to include Dakbel, Bagru and PIN code 303007.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add a product management page (admin-style) to upload product photos and manage product details (name, description, price).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add backend support to store and manage products with fields: name, description, price, and an uploaded product photo, including create, list, update, and delete operations.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add a \"Buy\" page/flow for products so users can purchase items from the product section.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Restrict product creation/edit/delete so only the site owner/admin (\"me\") can add/manage products (add authentication/authorization for the product management UI and related backend operations).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add backend authorization so that only a single designated admin (the site owner) can create, update, or delete products; all non-admin and anonymous callers must be rejected with clear error messages in English.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Implement an admin ownership mechanism in the backend: store an admin principal and provide a safe way to initialize it (one-time admin setup) and to read the current admin status for the logged-in user.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add product type/category options so products can be organized/browsed as \"Hardware Items\" and \"Agriculture Machines\" (e.g., category field and UI filtering/sections).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Add an \"Add to Cart\" option and cart flow for products (cart view, quantity updates, and proceed-to-buy/checkout via existing contact-based purchase CTA).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Add the provided logo and background assets to the website design/layout (apply logo in header/footer and use the background on appropriate sections/pages).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add the 4 user-uploaded image files to the frontend as static assets under `frontend/public/assets/uploaded/` (or `frontend/public/assets/generated/` if that is the existing convention for site images), preserving the original filenames:\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y.png`\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png`",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Shankar Gared Krishi Yantra Udhog",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
