@@ -29,7 +29,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png"
+                src="/assets/generated/shankar-gared-logo-unique.dim_512x512.png"
                 alt="Shankar Gared Krishi Yantra Udhog Logo"
                 className="h-12 w-auto object-contain"
               />

@@ -1,49 +1,73 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-16T17:01:19.297Z",
+  "generatedAt": "2026-02-17T06:57:34.289Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 2,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
-        "id": "REQ-24",
-        "summary": "Add the 4 user-uploaded image files to the frontend as static assets under `frontend/public/assets/uploaded/` (or `frontend/public/assets/generated/` if that is the existing convention for site images), preserving the original filenames:\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y.png`\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png`",
-        "status": "missing",
-        "plannedFiles": [
-          "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png",
-          "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png",
-          "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png",
-          "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y-1.png"
-        ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-25",
-        "summary": "Update the marketing site branding to use the uploaded logo image in the Header and Footer by replacing the current logo image source (`/assets/generated/shankar-gared-logo.dim_512x512.png`) with the uploaded logo file `Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (or `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` if the former is not suitable), while keeping existing alt text in English.",
+        "id": "REQ-39",
+        "summary": "Fix the production issue where the site renders a blank page after the recent deployment by identifying and resolving the runtime error(s) that prevent React from rendering (especially in the default landing view: Shop).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/marketing/Header.tsx",
-          "frontend/src/components/marketing/Footer.tsx"
+          "frontend/src/utils/safeProduct.ts",
+          "frontend/src/pages/Shop.tsx",
+          "frontend/src/hooks/useProducts.ts",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/marketing/Header.tsx",
-          "frontend/src/components/marketing/Footer.tsx"
+          "frontend/src/utils/safeProduct.ts",
+          "frontend/src/pages/Shop.tsx",
+          "frontend/src/hooks/useProducts.ts",
+          "frontend/src/App.tsx"
         ]
       },
       {
-        "id": "REQ-26",
-        "summary": "Apply the uploaded background image `Gemini_Generated_Image_i78ybxi78ybxi78y.png` (or `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` if the former is not suitable) as the Hero background image by replacing the current Hero image source (`/assets/generated/hero-hardware-agrimachinery.dim_1600x900.png`). Ensure text contrast and readability remain strong by keeping or adjusting the existing overlay/gradient as needed.",
+        "id": "REQ-40",
+        "summary": "Add a top-level, user-visible error fallback so that if any unexpected render error occurs, the app shows a non-blank error screen with clear English text and a way to recover (e.g., reload button and a button to go back to Shop).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/marketing/Hero.tsx"
+          "frontend/src/components/errors/AppErrorBoundary.tsx",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/marketing/Hero.tsx"
+          "frontend/src/components/errors/AppErrorBoundary.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-41",
+        "summary": "Harden product image URL rendering across Shop, Gallery, and Buy Product pages so that product images cannot crash the app (e.g., safely handle missing/invalid photo/gallery blobs and show a placeholder UI when an image URL cannot be produced).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/products/SafeProductImage.tsx",
+          "frontend/src/pages/Shop.tsx",
+          "frontend/src/pages/Gallery.tsx",
+          "frontend/src/pages/BuyProduct.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/products/SafeProductImage.tsx",
+          "frontend/src/pages/Shop.tsx",
+          "frontend/src/pages/Gallery.tsx",
+          "frontend/src/pages/BuyProduct.tsx"
+        ]
+      },
+      {
+        "id": "REQ-42",
+        "summary": "Ensure view switching never results in an empty (null) app body: if the current view state is invalid (e.g., Buy view without a selected product id), render a clear English message and a button to return to Shop instead of returning null.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/navigation/InvalidStateFallback.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/navigation/InvalidStateFallback.tsx",
+          "frontend/src/App.tsx"
         ]
       }
     ]
@@ -53,9 +77,15 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/marketing/Footer.tsx",
-    "frontend/src/components/marketing/Header.tsx",
-    "frontend/src/components/marketing/Hero.tsx",
+    "frontend/src/App.tsx",
+    "frontend/src/components/errors/AppErrorBoundary.tsx",
+    "frontend/src/components/navigation/InvalidStateFallback.tsx",
+    "frontend/src/components/products/SafeProductImage.tsx",
+    "frontend/src/hooks/useProducts.ts",
+    "frontend/src/pages/BuyProduct.tsx",
+    "frontend/src/pages/Gallery.tsx",
+    "frontend/src/pages/Shop.tsx",
+    "frontend/src/utils/safeProduct.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

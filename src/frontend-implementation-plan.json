@@ -1,72 +1,110 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Apply uploaded logo and hero background images across the marketing site",
+  "title": "Fix blank screen regression and add resilient error fallbacks",
   "requirements": [
     {
-      "id": "REQ-24",
-      "summary": "Add the four user-uploaded images as static frontend assets under the existing generated assets convention",
+      "id": "REQ-39",
+      "summary": "Eliminate initial-render runtime crashes causing a blank screen and ensure Shop renders safely with malformed product data.",
       "acceptanceCriteria": [
-        "All four uploaded image files exist in the repo under the chosen static assets folder and are accessible via `/assets/...` URLs at runtime.",
-        "No backend changes are required to serve these images."
+        "Loading the app shows the Header and the default Shop view (or a clear non-blank fallback state) instead of a blank screen.",
+        "No uncaught exceptions occur during initial render in the browser console on the deployed build.",
+        "If product data is malformed/missing fields, the UI still renders and shows a safe fallback instead of crashing."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png",
+          "path": "frontend/src/utils/safeProduct.ts",
           "operation": "create",
-          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+          "description": "Add runtime-safe helpers to validate/normalize product fields (e.g., name/description/price) and to safely extract image URLs from possibly-missing/invalid ExternalBlob instances. Ensure helpers never throw and always return reasonable English fallbacks."
         },
         {
-          "path": "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png",
-          "operation": "create",
-          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+          "path": "frontend/src/pages/Shop.tsx",
+          "operation": "modify",
+          "description": "Use the safe product/image helpers to prevent crashes during product card render when photo/name/description/price are missing or malformed; show an English placeholder area/message when an image URL cannot be produced. Use existing shadcn/ui Card and Button compositions; do not modify files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png",
-          "operation": "create",
-          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+          "path": "frontend/src/hooks/useProducts.ts",
+          "operation": "modify",
+          "description": "Harden React Query hooks to avoid throwing during initial render when the backend actor is not ready; ensure errors are surfaced to the UI in a controlled way rather than becoming uncaught exceptions."
         },
         {
-          "path": "frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y-1.png",
-          "operation": "create",
-          "description": "Add uploaded image as a static asset, preserving the original filename, under the existing `frontend/public/assets/generated/` convention."
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the main render path in a top-level error boundary (added in REQ-40) so unexpected errors during initial render do not produce a blank page. Ensure the default landing view (Shop) is still reachable on load."
         }
       ]
     },
     {
-      "id": "REQ-25",
-      "summary": "Replace Header and Footer branding logo with the uploaded logo image while keeping existing English alt text and layout",
+      "id": "REQ-40",
+      "summary": "Add a top-level error boundary + user-visible fallback screen with recovery actions (Reload and Go to Shop).",
       "acceptanceCriteria": [
-        "Header logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
-        "Footer logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
-        "No broken image links appear in the Header or Footer."
+        "When a rendering error is forced/triggered, the UI shows an error message in English (not a blank screen).",
+        "The error fallback provides at least a “Reload” action and a “Go to Shop” (or equivalent) recovery action.",
+        "Normal operation is unaffected when no error occurs."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/marketing/Header.tsx",
-          "operation": "modify",
-          "description": "Update the header logo `img` source to use the uploaded logo at `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (switch to `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` only if needed), keeping the existing English alt text and current sizing/alignment."
+          "path": "frontend/src/components/errors/AppErrorBoundary.tsx",
+          "operation": "create",
+          "description": "Create a React error boundary component that catches unexpected render errors and renders a non-blank fallback UI with clear English text plus actions: Reload (window.location.reload) and Go to Shop (invoke a provided callback). Compose the UI using existing shadcn/ui components (e.g., Card, Alert, Button); do not modify files under frontend/src/components/ui. Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/components/marketing/Footer.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Update the footer logo `img` source to use the uploaded logo at `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (switch to `frontend/public/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` only if needed), keeping the existing English alt text and current sizing/alignment."
+          "description": "Wire the AppErrorBoundary around the app’s main content so any render error shows the fallback screen. Provide callbacks that reset view state back to Shop and clear any invalid selected product state."
         }
       ]
     },
     {
-      "id": "REQ-26",
-      "summary": "Replace the Hero background image with the uploaded background while preserving strong text contrast and object-cover behavior",
+      "id": "REQ-41",
+      "summary": "Harden product image URL rendering in Shop, Gallery, and Buy Product so missing/invalid blobs never crash the app and placeholders are shown in English.",
       "acceptanceCriteria": [
-        "The Hero section uses the uploaded background image and it covers the section without distortion (object-cover behavior).",
-        "Hero headline, description, and CTA buttons remain readable on top of the new background (sufficient overlay/gradient remains).",
-        "No broken image link appears in the Hero section."
+        "Shop page renders even if a product has a missing/invalid primary photo; the product card shows a visible placeholder area instead of crashing.",
+        "Gallery page renders even if some products have missing/invalid images; invalid images are skipped or shown as placeholders without throwing.",
+        "Buy Product page renders even if gallery images are missing/invalid; the main image area shows a placeholder when necessary.",
+        "All user-facing fallback text is in English."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/marketing/Hero.tsx",
+          "path": "frontend/src/components/products/SafeProductImage.tsx",
+          "operation": "create",
+          "description": "Create a reusable image renderer that accepts a potentially-unsafe blob or URL and renders either a safe <img> with onError handling or a visible placeholder (English text). Compose placeholder UI with shadcn/ui where appropriate (e.g., Card/Alert styling via composition) and avoid modifying shadcn/ui source files. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/Shop.tsx",
           "operation": "modify",
-          "description": "Replace the Hero background image source with `frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png` (switch to `frontend/public/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` only if needed). Ensure the image remains `object-cover` and keep/adjust the existing gradient overlay and/or opacity to maintain readable text contrast."
+          "description": "Replace direct calls to product.photo.getDirectURL() with SafeProductImage and/or safe URL helpers so malformed photo blobs cannot throw during render. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/Gallery.tsx",
+          "operation": "modify",
+          "description": "Build the flattened gallery list using safe URL extraction so any invalid/missing blobs are skipped or represented with placeholders without throwing; ensure dialog preview also uses SafeProductImage/safe URL logic. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/BuyProduct.tsx",
+          "operation": "modify",
+          "description": "Construct the product image list using safe URL extraction, clamp selected image index when images are missing/filtered, and render a placeholder for the main image when no valid image URL exists. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-42",
+      "summary": "Prevent invalid view state from rendering an empty body by showing an English fallback with a button to return to Shop.",
+      "acceptanceCriteria": [
+        "The app never renders an empty main content area due to an invalid view state; a fallback message and recovery action are shown.",
+        "Manually setting an invalid state (e.g., buy view with no product selected) does not produce a blank screen.",
+        "Fallback message is in English and includes an obvious navigation action back to Shop."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/navigation/InvalidStateFallback.tsx",
+          "operation": "create",
+          "description": "Create a small fallback view for invalid app view state that displays clear English text and a prominent action button to return to Shop. Compose using shadcn/ui components (e.g., Card, Button, Alert) without modifying frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Replace the final ': null' render branch with InvalidStateFallback when view/selection state is inconsistent (e.g., buy view without selectedProductId). Wire the fallback’s action to reset state back to Shop."
         }
       ]
     }

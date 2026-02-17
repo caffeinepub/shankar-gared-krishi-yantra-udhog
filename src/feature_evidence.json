@@ -2,11 +2,13 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-marketing-site-branding-to-use-the-uploaded-logo-image-in-the-header-and-footer-by-replacing-the-current-logo-image-source-assets-generated-shankar-gared-logo-dim-512x512-png-with-the-uploaded-logo-file-gemini-generated-image-8fgrd38fgrd38fgr-png-or-gemini-generated-image-8fgrd38fgrd38fgr-1-png-if-the-former-is-not-suitable-while-keeping-existing-alt-text-in-english",
-      "featureTitle": "Update the marketing site branding to use the uploaded logo image in the Header and Footer by replacing the current logo image source (`/assets/generated/shankar-gared-logo.dim_512x512.png`) with the uploaded logo file `Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (or `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` if the former is not suitable), while keeping existing alt text in English.",
+      "featureId": "feature-fix-the-production-issue-where-the-site-renders-a-blank-page-after-the-recent-deployment-by-identifying-and-resolving-the-runtime-error-s-that-prevent-react-from-rendering-especially-in-the-default-landing-view-shop",
+      "featureTitle": "Fix the production issue where the site renders a blank page after the recent deployment by identifying and resolving the runtime error(s) that prevent React from rendering (especially in the default landing view: Shop).",
       "files": [
-        "frontend/src/components/marketing/Footer.tsx",
-        "frontend/src/components/marketing/Header.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useProducts.ts",
+        "frontend/src/pages/Shop.tsx",
+        "frontend/src/utils/safeProduct.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -18,15 +20,16 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-25"
+        "REQ-39"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-apply-the-uploaded-background-image-gemini-generated-image-i78ybxi78ybxi78y-png-or-gemini-generated-image-i78ybxi78ybxi78y-1-png-if-the-former-is-not-suitable-as-the-hero-background-image-by-replacing-the-current-hero-image-source-assets-generated-hero-hardware-agrimachinery-dim-1600x900-png-ensure-text-contrast-and-readability-remain-strong-by-keeping-or-adjusting-the-existing-overlay-gradient-as-needed",
-      "featureTitle": "Apply the uploaded background image `Gemini_Generated_Image_i78ybxi78ybxi78y.png` (or `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` if the former is not suitable) as the Hero background image by replacing the current Hero image source (`/assets/generated/hero-hardware-agrimachinery.dim_1600x900.png`). Ensure text contrast and readability remain strong by keeping or adjusting the existing overlay/gradient as needed.",
+      "featureId": "feature-add-a-top-level-user-visible-error-fallback-so-that-if-any-unexpected-render-error-occurs-the-app-shows-a-non-blank-error-screen-with-clear-english-text-and-a-way-to-recover-e-g-reload-button-and-a-button-to-go-back-to-shop",
+      "featureTitle": "Add a top-level, user-visible error fallback so that if any unexpected render error occurs, the app shows a non-blank error screen with clear English text and a way to recover (e.g., reload button and a button to go back to Shop).",
       "files": [
-        "frontend/src/components/marketing/Hero.tsx"
+        "frontend/src/App.tsx",
+        "frontend/src/components/errors/AppErrorBoundary.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -38,7 +41,51 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-26"
+        "REQ-40"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-harden-product-image-url-rendering-across-shop-gallery-and-buy-product-pages-so-that-product-images-cannot-crash-the-app-e-g-safely-handle-missing-invalid-photo-gallery-blobs-and-show-a-placeholder-ui-when-an-image-url-cannot-be-produced",
+      "featureTitle": "Harden product image URL rendering across Shop, Gallery, and Buy Product pages so that product images cannot crash the app (e.g., safely handle missing/invalid photo/gallery blobs and show a placeholder UI when an image URL cannot be produced).",
+      "files": [
+        "frontend/src/components/products/SafeProductImage.tsx",
+        "frontend/src/pages/BuyProduct.tsx",
+        "frontend/src/pages/Gallery.tsx",
+        "frontend/src/pages/Shop.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-41"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-view-switching-never-results-in-an-empty-null-app-body-if-the-current-view-state-is-invalid-e-g-buy-view-without-a-selected-product-id-render-a-clear-english-message-and-a-button-to-return-to-shop-instead-of-returning-null",
+      "featureTitle": "Ensure view switching never results in an empty (null) app body: if the current view state is invalid (e.g., Buy view without a selected product id), render a clear English message and a button to return to Shop instead of returning null.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/navigation/InvalidStateFallback.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "blob-storage@4.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-42"
       ],
       "confidence": "high"
     }

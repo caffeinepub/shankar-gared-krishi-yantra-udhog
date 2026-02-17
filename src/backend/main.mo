@@ -21,6 +21,7 @@ actor {
     description : Text;
     price : Nat;
     photo : Storage.ExternalBlob;
+    gallery : [Storage.ExternalBlob];
   };
 
   var nextId = 0;
@@ -31,6 +32,7 @@ actor {
     description : Text;
     price : Nat;
     photo : Storage.ExternalBlob;
+    gallery : [Storage.ExternalBlob];
   };
 
   public type UserProfile = {
@@ -74,6 +76,7 @@ actor {
       description = input.description;
       price = input.price;
       photo = input.photo;
+      gallery = input.gallery;
     };
 
     products.add(id, product);
@@ -105,6 +108,7 @@ actor {
           description = input.description;
           price = input.price;
           photo = input.photo;
+          gallery = input.gallery;
         };
         products.add(id, updated);
         updated;
@@ -119,7 +123,7 @@ actor {
 
     switch (products.get(id)) {
       case (null) { Runtime.trap("Product not found") };
-      case (?product) {
+      case (?_) {
         products.remove(id);
       };
     };

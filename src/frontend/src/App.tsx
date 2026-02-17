@@ -9,11 +9,14 @@ import Footer from './components/marketing/Footer';
 import ProductManagement from './pages/ProductManagement';
 import Shop from './pages/Shop';
 import BuyProduct from './pages/BuyProduct';
+import Gallery from './pages/Gallery';
+import AppErrorBoundary from './components/errors/AppErrorBoundary';
+import InvalidStateFallback from './components/navigation/InvalidStateFallback';
 
-type View = 'marketing' | 'products' | 'shop' | 'buy';
+type View = 'marketing' | 'products' | 'shop' | 'buy' | 'gallery';
 
 function App() {
-  const [view, setView] = useState<View>('marketing');
+  const [view, setView] = useState<View>('shop');
   const [selectedProductId, setSelectedProductId] = useState<bigint | null>(null);
 
   const handleBuyProduct = (productId: bigint) => {
@@ -26,28 +29,39 @@ function App() {
     setView('shop');
   };
 
+  const handleErrorReset = () => {
+    setSelectedProductId(null);
+    setView('shop');
+  };
+
   return (
-    <div className="min-h-screen">
-      <Header currentView={view} onViewChange={setView} />
-      {view === 'marketing' ? (
-        <>
-          <main>
-            <Hero />
-            <Categories />
-            <Services />
-            <About />
-            <Contact />
-          </main>
-          <Footer />
-        </>
-      ) : view === 'products' ? (
-        <ProductManagement />
-      ) : view === 'shop' ? (
-        <Shop onBuyProduct={handleBuyProduct} />
-      ) : view === 'buy' && selectedProductId !== null ? (
-        <BuyProduct productId={selectedProductId} onBack={handleBackToShop} />
-      ) : null}
-    </div>
+    <AppErrorBoundary onReset={handleErrorReset}>
+      <div className="min-h-screen">
+        <Header currentView={view} onViewChange={setView} />
+        {view === 'marketing' ? (
+          <>
+            <main>
+              <Hero />
+              <Categories />
+              <Services />
+              <About />
+              <Contact />
+            </main>
+            <Footer />
+          </>
+        ) : view === 'products' ? (
+          <ProductManagement />
+        ) : view === 'shop' ? (
+          <Shop onBuyProduct={handleBuyProduct} />
+        ) : view === 'gallery' ? (
+          <Gallery onViewProduct={handleBuyProduct} />
+        ) : view === 'buy' && selectedProductId !== null ? (
+          <BuyProduct productId={selectedProductId} onBack={handleBackToShop} />
+        ) : (
+          <InvalidStateFallback onReturnToShop={handleBackToShop} />
+        )}
+      </div>
+    </AppErrorBoundary>
   );
 }
 

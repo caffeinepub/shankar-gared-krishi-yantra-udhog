@@ -19,6 +19,7 @@ export interface ProductInput {
     description: string;
     photo: ExternalBlob;
     price: bigint;
+    gallery: Array<ExternalBlob>;
 }
 export interface UserProfile {
     name: string;
@@ -29,6 +30,7 @@ export interface Product {
     description: string;
     photo: ExternalBlob;
     price: bigint;
+    gallery: Array<ExternalBlob>;
 }
 export enum UserRole {
     admin = "admin",

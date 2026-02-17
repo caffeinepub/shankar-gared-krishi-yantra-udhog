@@ -1,11 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Apply the user-uploaded logo and background images across the marketing website to update branding.
+**Goal:** Fix the production regression causing a blank screen by preventing runtime render crashes and ensuring the app always shows a non-blank UI (Shop by default or a clear fallback).
 
 **Planned changes:**
-- Add the 4 uploaded image files to the frontend static assets folder (per existing convention) with original filenames and ensure they are accessible via `/assets/...` URLs.
-- Replace the current Header and Footer logo image with the uploaded logo image, keeping the existing English alt text and maintaining responsive sizing/alignment.
-- Replace the current Hero background image with the uploaded background image, keeping/adjusting the existing overlay/gradient to maintain strong text contrast and readability.
+- Identify and fix the runtime error(s) that prevent React from rendering in production, especially on initial load to the Shop view.
+- Add a top-level error fallback screen that appears on unexpected render errors and includes “Reload” and “Go to Shop” recovery actions.
+- Harden product image URL handling on Shop, Gallery, and Buy Product pages to safely handle missing/invalid image data with visible placeholders and English fallback text.
+- Ensure invalid view state (e.g., Buy view without a selected product) renders a clear English fallback message with a button to return to Shop rather than rendering null/empty content.
 
-**User-visible outcome:** The website shows the new uploaded logo in the Header and Footer, and the Hero section displays the new uploaded background image with readable text and working image links.
+**User-visible outcome:** The deployed site no longer shows a blank screen; the Header and Shop view (or a clear English fallback) render reliably, errors show an actionable recovery screen, and missing/invalid product image data or invalid view state does not crash the app.

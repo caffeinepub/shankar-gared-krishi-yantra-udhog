@@ -7,7 +7,7 @@ export default function Hero() {
     <section id="hero" className="relative pt-20 min-h-screen flex items-center">
       <div className="absolute inset-0 z-0">
         <img
-          src="/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png"
+          src="/assets/generated/shankar-gared-hero-bg-unique.dim_1600x900.png"
           alt="Hardware tools and agricultural machinery"
           className="w-full h-full object-cover"
         />

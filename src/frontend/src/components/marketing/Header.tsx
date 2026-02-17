@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Package, ShoppingBag } from 'lucide-react';
+import { Menu, X, Package, ShoppingBag, Images } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface HeaderProps {
-  currentView: 'marketing' | 'products' | 'shop' | 'buy';
-  onViewChange: (view: 'marketing' | 'products' | 'shop' | 'buy') => void;
+  currentView: 'marketing' | 'products' | 'shop' | 'buy' | 'gallery';
+  onViewChange: (view: 'marketing' | 'products' | 'shop' | 'buy' | 'gallery') => void;
 }
 
 export default function Header({ currentView, onViewChange }: HeaderProps) {
@@ -62,7 +62,7 @@ export default function Header({ currentView, onViewChange }: HeaderProps) {
             className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
           >
             <img
-              src="/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png"
+              src="/assets/generated/shankar-gared-logo-unique.dim_512x512.png"
               alt="Shankar Gared Krishi Yantra Udhog Logo"
               className="h-12 w-auto object-contain"
             />
@@ -84,8 +84,17 @@ export default function Header({ currentView, onViewChange }: HeaderProps) {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => onViewChange('shop')}
+                  onClick={() => onViewChange('gallery')}
                   className="ml-2"
+                >
+                  <Images className="h-4 w-4 mr-2" />
+                  Gallery
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => onViewChange('shop')}
+                  className="ml-1"
                 >
                   <ShoppingBag className="h-4 w-4 mr-2" />
                   Shop
@@ -100,7 +109,7 @@ export default function Header({ currentView, onViewChange }: HeaderProps) {
                   Manage Products
                 </Button>
               </>
-            ) : currentView === 'products' || currentView === 'shop' || currentView === 'buy' ? (
+            ) : currentView === 'products' || currentView === 'shop' || currentView === 'buy' || currentView === 'gallery' ? (
               <>
                 <Button
                   variant="ghost"
@@ -109,6 +118,16 @@ export default function Header({ currentView, onViewChange }: HeaderProps) {
                 >
                   Home
                 </Button>
+                {currentView !== 'gallery' && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => onViewChange('gallery')}
+                  >
+                    <Images className="h-4 w-4 mr-2" />
+                    Gallery
+                  </Button>
+                )}
                 {currentView !== 'shop' && (
                   <Button
                     variant="ghost"
@@ -162,6 +181,16 @@ export default function Header({ currentView, onViewChange }: HeaderProps) {
                   ))}
                   <button
                     onClick={() => {
+                      onViewChange('gallery');
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center gap-2"
+                  >
+                    <Images className="h-4 w-4" />
+                    Gallery
+                  </button>
+                  <button
+                    onClick={() => {
                       onViewChange('shop');
                       setIsMobileMenuOpen(false);
                     }}
@@ -192,6 +221,18 @@ export default function Header({ currentView, onViewChange }: HeaderProps) {
                   >
                     Home
                   </button>
+                  {currentView !== 'gallery' && (
+                    <button
+                      onClick={() => {
+                        onViewChange('gallery');
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="px-4 py-3 text-left text-sm font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center gap-2"
+                    >
+                      <Images className="h-4 w-4" />
+                      Gallery
+                    </button>
+                  )}
                   {currentView !== 'shop' && (
                     <button
                       onClick={() => {

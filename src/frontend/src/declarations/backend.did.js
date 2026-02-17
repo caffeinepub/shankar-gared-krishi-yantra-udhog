@@ -30,6 +30,7 @@ export const ProductInput = IDL.Record({
   'description' : IDL.Text,
   'photo' : ExternalBlob,
   'price' : IDL.Nat,
+  'gallery' : IDL.Vec(ExternalBlob),
 });
 export const Product = IDL.Record({
   'id' : IDL.Nat,
@@ -37,6 +38,7 @@ export const Product = IDL.Record({
   'description' : IDL.Text,
   'photo' : ExternalBlob,
   'price' : IDL.Nat,
+  'gallery' : IDL.Vec(ExternalBlob),
 });
 export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 
@@ -110,6 +112,7 @@ export const idlFactory = ({ IDL }) => {
     'description' : IDL.Text,
     'photo' : ExternalBlob,
     'price' : IDL.Nat,
+    'gallery' : IDL.Vec(ExternalBlob),
   });
   const Product = IDL.Record({
     'id' : IDL.Nat,
@@ -117,6 +120,7 @@ export const idlFactory = ({ IDL }) => {
     'description' : IDL.Text,
     'photo' : ExternalBlob,
     'price' : IDL.Nat,
+    'gallery' : IDL.Vec(ExternalBlob),
   });
   const UserProfile = IDL.Record({ 'name' : IDL.Text });
   

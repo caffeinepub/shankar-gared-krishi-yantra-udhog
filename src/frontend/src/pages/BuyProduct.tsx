@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,6 +6,13 @@ import { Label } from '@/components/ui/label';
 import { ArrowLeft, Phone, Mail, Loader2, Minus, Plus } from 'lucide-react';
 import { useGetProduct } from '@/hooks/useProducts';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import SafeProductImage from '@/components/products/SafeProductImage';
+import {
+  safeGetAllProductImageURLs,
+  safeGetProductName,
+  safeGetProductDescription,
+  safeGetProductPrice,
+} from '@/utils/safeProduct';
 
 interface BuyProductProps {
   productId: bigint;
@@ -15,6 +22,7 @@ interface BuyProductProps {
 export default function BuyProduct({ productId, onBack }: BuyProductProps) {
   const { data: product, isLoading, isError } = useGetProduct(productId);
   const [quantity, setQuantity] = useState(1);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity >= 1) {
@@ -22,18 +30,30 @@ export default function BuyProduct({ productId, onBack }: BuyProductProps) {
     }
   };
 
-  const totalPrice = product ? Number(product.price) * quantity : 0;
+  // Safely extract all image URLs
+  const allImageURLs = safeGetAllProductImageURLs(product);
+  const hasGallery = allImageURLs.length > 1;
+
+  // Clamp selected image index when images change
+  useEffect(() => {
+    if (selectedImageIndex >= allImageURLs.length && allImageURLs.length > 0) {
+      setSelectedImageIndex(0);
+    }
+  }, [allImageURLs.length, selectedImageIndex]);
+
+  const name = safeGetProductName(product);
+  const description = safeGetProductDescription(product);
+  const price = safeGetProductPrice(product);
+  const totalPrice = Number(price) * quantity;
 
   const handleCallToOrder = () => {
     window.location.href = 'tel:9928281833';
   };
 
   const handleEmailOrder = () => {
-    if (!product) return;
-    
-    const subject = encodeURIComponent(`Order Request: ${product.name}`);
+    const subject = encodeURIComponent(`Order Request: ${name}`);
     const body = encodeURIComponent(
-      `Hello,\n\nI would like to order the following product:\n\nProduct: ${product.name}\nQuantity: ${quantity}\nUnit Price: ₹${product.price.toString()}\nTotal Price: ₹${totalPrice}\n\nPlease contact me to complete this order.\n\nThank you!`
+      `Hello,\n\nI would like to order the following product:\n\nProduct: ${name}\nQuantity: ${quantity}\nUnit Price: ₹${price.toString()}\nTotal Price: ₹${totalPrice}\n\nPlease contact me to complete this order.\n\nThank you!`
     );
     
     window.location.href = `mailto:sgkyu@gmail.com?subject=${subject}&body=${body}`;
@@ -78,25 +98,60 @@ export default function BuyProduct({ productId, onBack }: BuyProductProps) {
         </Button>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Product Image */}
-          <div className="aspect-square w-full overflow-hidden rounded-lg bg-muted">
-            <img
-              src={product.photo.getDirectURL()}
-              alt={product.name}
-              className="w-full h-full object-cover"
-            />
+          {/* Product Images */}
+          <div className="space-y-4">
+            {/* Main Image Display */}
+            <div className="aspect-square w-full overflow-hidden rounded-lg bg-muted">
+              {allImageURLs.length > 0 ? (
+                <SafeProductImage
+                  src={allImageURLs[selectedImageIndex] || null}
+                  alt={name}
+                  className="w-full h-full object-cover"
+                  placeholderClassName="w-full h-full"
+                />
+              ) : (
+                <SafeProductImage
+                  src={null}
+                  alt={name}
+                  placeholderClassName="w-full h-full"
+                />
+              )}
+            </div>
+
+            {/* Thumbnail Strip */}
+            {hasGallery && (
+              <div className="grid grid-cols-5 gap-2">
+                {allImageURLs.map((imageUrl, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`aspect-square overflow-hidden rounded-md bg-muted transition-all ${
+                      selectedImageIndex === index
+                        ? 'ring-2 ring-primary'
+                        : 'hover:ring-2 hover:ring-primary/50'
+                    }`}
+                  >
+                    <SafeProductImage
+                      src={imageUrl}
+                      alt={`${name} view ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Product Details & Order Form */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold text-foreground mb-2">{product.name}</h1>
-              <p className="text-2xl font-bold text-primary">₹{product.price.toString()}</p>
+              <h1 className="text-3xl font-bold text-foreground mb-2">{name}</h1>
+              <p className="text-2xl font-bold text-primary">₹{price.toString()}</p>
             </div>
 
             <div>
               <h2 className="text-lg font-semibold text-foreground mb-2">Description</h2>
-              <p className="text-muted-foreground whitespace-pre-wrap">{product.description}</p>
+              <p className="text-muted-foreground whitespace-pre-wrap">{description}</p>
             </div>
 
             <Card>

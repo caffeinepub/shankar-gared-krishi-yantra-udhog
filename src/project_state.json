@@ -1,12 +1,14 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
+  "projectStateVersion": 25,
   "summary": "Build a website for a hardware shop named \"Shankar Gared Krishi Yantra Udhog\".",
   "architectural_notes": [
     "Add admin-only access control for product management UI and product CRUD backend endpoints (authentication + authorization)."
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Website is displaying a blank page (blank screen) after recent deployment/update (product-first landing view change)."
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-responsive-single-page-marketing-website-for-the-hardware-shop-named-shankar-gared-krishi-yantra-udhog",
@@ -183,6 +185,118 @@
         "REQ-26"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-newly-generated-unique-clear-branding-images-logo-hero-background-as-static-assets-under-frontend-public-assets-generated-and-ensure-they-are-included-in-the-build-output",
+      "title": "Add newly generated, unique, clear branding images (logo + hero background) as static assets under `frontend/public/assets/generated/` and ensure they are included in the build output.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-marketing-site-header-and-footer-to-use-the-newly-generated-logo-image-instead-of-the-current-assets-generated-gemini-generated-image-8fgrd38fgrd38fgr-png-keeping-the-existing-english-alt-text-unchanged",
+      "title": "Update the marketing site Header and Footer to use the newly generated logo image instead of the current `/assets/generated/Gemini_Generated_Image_8fgrd38fgrd38fgr.png`, keeping the existing English alt text unchanged.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-marketing-hero-section-to-use-the-newly-generated-unique-background-image-instead-of-the-current-assets-generated-gemini-generated-image-i78ybxi78ybxi78y-png-preserving-strong-text-contrast-by-keeping-or-adjusting-the-existing-overlay-gradient",
+      "title": "Update the marketing Hero section to use the newly generated unique background image instead of the current `/assets/generated/Gemini_Generated_Image_i78ybxi78ybxi78y.png`, preserving strong text contrast by keeping (or adjusting) the existing overlay gradient.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-new-static-product-photo-asset-for-an-open-end-wrench-usable-as-a-shared-image-for-multiple-open-end-wrench-size-variants-under-frontend-public-assets-generated",
+      "title": "Add a new static product photo asset for an Open End Wrench (usable as a shared image for multiple Open End Wrench size variants) under `frontend/public/assets/generated/`.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-admin-only-product-management-page-add-an-admin-only-action-e-g-a-button-to-bulk-create-hand-tools-items-for-open-end-wrench-in-multiple-sizes-so-they-appear-in-the-shop-product-list-after-creation",
+      "title": "In the admin-only Product Management page, add an admin-only action (e.g., a button) to bulk-create Hand Tools items for Open End Wrench in multiple sizes so they appear in the Shop product list after creation.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-admin-product-management-page-to-allow-the-admin-to-upload-and-manage-multiple-gallery-images-per-product-in-addition-to-the-existing-primary-product-photo-upload",
+      "title": "Update the admin Product Management page to allow the admin to upload and manage multiple gallery images per product in addition to the existing primary product photo upload.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-customer-facing-gallery-view-that-displays-product-images-in-a-browsable-gallery-grid-and-can-be-accessed-via-the-site-header-navigation-without-breaking-existing-marketing-shop-manage-products-navigation-behavior",
+      "title": "Add a customer-facing Gallery view that displays product images in a browsable gallery grid and can be accessed via the site header navigation without breaking existing Marketing/Shop/Manage Products navigation behavior.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-customer-buy-product-page-to-display-a-product-image-gallery-primary-image-plus-thumbnails-selection-for-any-additional-gallery-images-when-gallery-images-exist",
+      "title": "Update the customer Buy Product page to display a product image gallery (primary image plus thumbnails/selection for any additional gallery images) when gallery images exist.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-data-typing-and-react-query-data-flow-to-handle-the-new-product-gallery-field-returned-by-the-backend-and-used-by-product-management-gallery-shop-and-buy-pages",
+      "title": "Update frontend data typing and React Query data flow to handle the new product gallery field returned by the backend and used by Product Management, Gallery, Shop, and Buy pages.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-the-app-s-default-landing-view-so-that-when-a-user-opens-the-site-the-shop-products-listing-view-is-shown-first-instead-of-the-marketing-view-while-keeping-navigation-to-marketing-gallery-buy-flow-and-manage-products-available-through-the-existing-header-controls",
+      "title": "Change the app’s default landing view so that when a user opens the site, the Shop (products listing) view is shown first instead of the Marketing view, while keeping navigation to Marketing, Gallery, Buy flow, and Manage Products available through the existing header controls.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-production-issue-where-the-site-renders-a-blank-page-after-the-recent-deployment-by-identifying-and-resolving-the-runtime-error-s-that-prevent-react-from-rendering-especially-in-the-default-landing-view-shop",
+      "title": "Fix the production issue where the site renders a blank page after the recent deployment by identifying and resolving the runtime error(s) that prevent React from rendering (especially in the default landing view: Shop).",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-top-level-user-visible-error-fallback-so-that-if-any-unexpected-render-error-occurs-the-app-shows-a-non-blank-error-screen-with-clear-english-text-and-a-way-to-recover-e-g-reload-button-and-a-button-to-go-back-to-shop",
+      "title": "Add a top-level, user-visible error fallback so that if any unexpected render error occurs, the app shows a non-blank error screen with clear English text and a way to recover (e.g., reload button and a button to go back to Shop).",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-harden-product-image-url-rendering-across-shop-gallery-and-buy-product-pages-so-that-product-images-cannot-crash-the-app-e-g-safely-handle-missing-invalid-photo-gallery-blobs-and-show-a-placeholder-ui-when-an-image-url-cannot-be-produced",
+      "title": "Harden product image URL rendering across Shop, Gallery, and Buy Product pages so that product images cannot crash the app (e.g., safely handle missing/invalid photo/gallery blobs and show a placeholder UI when an image URL cannot be produced).",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-view-switching-never-results-in-an-empty-null-app-body-if-the-current-view-state-is-invalid-e-g-buy-view-without-a-selected-product-id-render-a-clear-english-message-and-a-button-to-return-to-shop-instead-of-returning-null",
+      "title": "Ensure view switching never results in an empty (null) app body: if the current view state is invalid (e.g., Buy view without a selected product id), render a clear English message and a button to return to Shop instead of returning null.",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -270,6 +384,46 @@
       "reqIds": [
         "REQ-24"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Create a new unique, clear website background image and a new unique, clear logo for the website (generate new assets rather than using the current ones).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Add product items under Hand Tools: Open End Wrench (all sizes), so they appear in the shop product list (and can be managed in the admin product management UI).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Add a gallery option on the website so product images can be displayed in a gallery view (browsable gallery section/page).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Add support for a per-product image gallery (multiple images per product) in the backend by extending the Product and ProductInput types and updating createProduct, getProduct, listProducts, and updateProduct to persist and return the gallery images in addition to the existing primary product photo.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Create and wire a conditional Motoko state migration (backend/migration.mo) to safely upgrade existing stored products to the new Product schema by initializing the new gallery field to an empty list for all existing products.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Change the site’s default landing view so that when users open the site, the Products/Shop page is shown first (instead of the marketing section), while keeping navigation to other sections/pages available.",
+      "reqIds": [],
       "status": "pending"
     }
   ],

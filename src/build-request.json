@@ -1,87 +1,93 @@
 {
   "kind": "build_request",
-  "title": "Apply uploaded logo and background images across the website",
-  "projectName": "Shankar Gared",
-  "priority": "normal",
+  "title": "Fix blank screen regression on deployed site",
+  "projectName": "Shankar Gared Shop",
+  "priority": "high",
   "requirements": [
     {
-      "id": "REQ-24",
-      "text": "Add the 4 user-uploaded image files to the frontend as static assets under `frontend/public/assets/uploaded/` (or `frontend/public/assets/generated/` if that is the existing convention for site images), preserving the original filenames:\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y.png`\n- `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png`\n- `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png`",
+      "id": "REQ-39",
+      "text": "Fix the production issue where the site renders a blank page after the recent deployment by identifying and resolving the runtime error(s) that prevent React from rendering (especially in the default landing view: Shop).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1",
-          "msg-2"
+          "msg-1"
         ],
         "quotes": [
-          "add this logo and background in website"
+          "the website is seeing blank"
         ]
       },
       "acceptanceCriteria": [
-        "All four uploaded image files exist in the repo under the chosen static assets folder and are accessible via `/assets/...` URLs at runtime.",
-        "No backend changes are required to serve these images."
+        "Loading the app shows the Header and the default Shop view (or a clear non-blank fallback state) instead of a blank screen.",
+        "No uncaught exceptions occur during initial render in the browser console on the deployed build.",
+        "If product data is malformed/missing fields, the UI still renders and shows a safe fallback instead of crashing."
       ]
     },
     {
-      "id": "REQ-25",
-      "text": "Update the marketing site branding to use the uploaded logo image in the Header and Footer by replacing the current logo image source (`/assets/generated/shankar-gared-logo.dim_512x512.png`) with the uploaded logo file `Gemini_Generated_Image_8fgrd38fgrd38fgr.png` (or `Gemini_Generated_Image_8fgrd38fgrd38fgr-1.png` if the former is not suitable), while keeping existing alt text in English.",
+      "id": "REQ-40",
+      "text": "Add a top-level, user-visible error fallback so that if any unexpected render error occurs, the app shows a non-blank error screen with clear English text and a way to recover (e.g., reload button and a button to go back to Shop).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1",
-          "msg-2"
+          "msg-1"
         ],
         "quotes": [
-          "add this logo and background in website"
+          "the website is seeing blank"
         ]
       },
       "acceptanceCriteria": [
-        "Header logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
-        "Footer logo renders the uploaded logo image and remains correctly sized/aligned on mobile and desktop.",
-        "No broken image links appear in the Header or Footer."
+        "When a rendering error is forced/triggered, the UI shows an error message in English (not a blank screen).",
+        "The error fallback provides at least a “Reload” action and a “Go to Shop” (or equivalent) recovery action.",
+        "Normal operation is unaffected when no error occurs."
       ]
     },
     {
-      "id": "REQ-26",
-      "text": "Apply the uploaded background image `Gemini_Generated_Image_i78ybxi78ybxi78y.png` (or `Gemini_Generated_Image_i78ybxi78ybxi78y-1.png` if the former is not suitable) as the Hero background image by replacing the current Hero image source (`/assets/generated/hero-hardware-agrimachinery.dim_1600x900.png`). Ensure text contrast and readability remain strong by keeping or adjusting the existing overlay/gradient as needed.",
+      "id": "REQ-41",
+      "text": "Harden product image URL rendering across Shop, Gallery, and Buy Product pages so that product images cannot crash the app (e.g., safely handle missing/invalid photo/gallery blobs and show a placeholder UI when an image URL cannot be produced).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1",
-          "msg-2"
+          "msg-1"
         ],
         "quotes": [
-          "add this logo and background in website"
+          "the website is seeing blank"
         ]
       },
       "acceptanceCriteria": [
-        "The Hero section uses the uploaded background image and it covers the section without distortion (object-cover behavior).",
-        "Hero headline, description, and CTA buttons remain readable on top of the new background (sufficient overlay/gradient remains).",
-        "No broken image link appears in the Hero section."
+        "Shop page renders even if a product has a missing/invalid primary photo; the product card shows a visible placeholder area instead of crashing.",
+        "Gallery page renders even if some products have missing/invalid images; invalid images are skipped or shown as placeholders without throwing.",
+        "Buy Product page renders even if gallery images are missing/invalid; the main image area shows a placeholder when necessary.",
+        "All user-facing fallback text is in English."
+      ]
+    },
+    {
+      "id": "REQ-42",
+      "text": "Ensure view switching never results in an empty (null) app body: if the current view state is invalid (e.g., Buy view without a selected product id), render a clear English message and a button to return to Shop instead of returning null.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "the website is seeing blank"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app never renders an empty main content area due to an invalid view state; a fallback message and recovery action are shown.",
+        "Manually setting an invalid state (e.g., buy view with no product selected) does not produce a blank screen.",
+        "Fallback message is in English and includes an obvious navigation action back to Shop."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under `frontend/src/components/ui` (compose them instead).",
-    "Do not edit any files listed in `frontend.immutablePaths` in SYSTEM_CONTEXT.",
-    "Use English for any user-facing text."
+    "Do not modify files under frontend/src/components/ui (shadcn/ui components); compose them instead.",
+    "Do not edit frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths)."
   ],
   "nonGoals": [
-    "Do not change backend canister logic or data schemas.",
-    "Do not redesign unrelated pages or modify product/shop/cart functionality beyond applying the requested logo/background assets."
+    "Adding new product features or changing the existing navigation structure beyond what is required to prevent blank/empty rendering.",
+    "Backend schema changes or Motoko canister logic changes unless a frontend fix cannot resolve the blank screen."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

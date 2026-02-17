@@ -17,12 +17,14 @@ export interface Product {
   'description' : string,
   'photo' : ExternalBlob,
   'price' : bigint,
+  'gallery' : Array<ExternalBlob>,
 }
 export interface ProductInput {
   'name' : string,
   'description' : string,
   'photo' : ExternalBlob,
   'price' : bigint,
+  'gallery' : Array<ExternalBlob>,
 }
 export interface UserProfile { 'name' : string }
 export type UserRole = { 'admin' : null } |

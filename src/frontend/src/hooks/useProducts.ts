@@ -9,9 +9,15 @@ export function useListProducts() {
     queryKey: ['products'],
     queryFn: async () => {
       if (!actor) return [];
-      return actor.listProducts();
+      try {
+        return await actor.listProducts();
+      } catch (error) {
+        console.error('Failed to list products:', error);
+        throw error;
+      }
     },
     enabled: !!actor && !isFetching,
+    retry: 2,
   });
 }
 
@@ -22,9 +28,15 @@ export function useGetProduct(id: bigint) {
     queryKey: ['product', id.toString()],
     queryFn: async () => {
       if (!actor) throw new Error('Actor not initialized');
-      return actor.getProduct(id);
+      try {
+        return await actor.getProduct(id);
+      } catch (error) {
+        console.error(`Failed to get product ${id}:`, error);
+        throw error;
+      }
     },
     enabled: !!actor && !isFetching,
+    retry: 2,
   });
 }
 
@@ -35,7 +47,12 @@ export function useCreateProduct() {
   return useMutation({
     mutationFn: async (input: ProductInput) => {
       if (!actor) throw new Error('Actor not initialized');
-      return actor.createProduct(input);
+      try {
+        return await actor.createProduct(input);
+      } catch (error) {
+        console.error('Failed to create product:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['products'] });
@@ -50,10 +67,16 @@ export function useUpdateProduct() {
   return useMutation({
     mutationFn: async ({ id, input }: { id: bigint; input: ProductInput }) => {
       if (!actor) throw new Error('Actor not initialized');
-      return actor.updateProduct(id, input);
+      try {
+        return await actor.updateProduct(id, input);
+      } catch (error) {
+        console.error(`Failed to update product ${id}:`, error);
+        throw error;
+      }
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['product', variables.id.toString()] });
     },
   });
 }
@@ -65,7 +88,12 @@ export function useDeleteProduct() {
   return useMutation({
     mutationFn: async (id: bigint) => {
       if (!actor) throw new Error('Actor not initialized');
-      return actor.deleteProduct(id);
+      try {
+        return await actor.deleteProduct(id);
+      } catch (error) {
+        console.error(`Failed to delete product ${id}:`, error);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['products'] });
